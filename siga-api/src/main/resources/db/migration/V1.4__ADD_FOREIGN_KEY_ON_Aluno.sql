@@ -1,0 +1,3 @@
+
+ALTER TABLE IF EXISTS turma ALTER column classe_id SET DATA TYPE INTEGER;
+ALTER TABLE IF EXISTS aluno ADD CONSTRAINT FK_aluno_country FOREIGN KEY (nacionalidade_id) REFERENCES country;

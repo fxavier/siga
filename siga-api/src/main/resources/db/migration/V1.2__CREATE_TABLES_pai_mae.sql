@@ -1,0 +1,21 @@
+CREATE TABLE pai (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(255),
+    telefone VARCHAR(255),
+    email VARCHAR(255),
+    endereco VARCHAR(255)
+);
+
+CREATE TABLE mae (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(255),
+    telefone VARCHAR(255),
+    email VARCHAR(255),
+    endereco VARCHAR(255)
+);
+
+ALTER TABLE aluno ADD COLUMN foto VARCHAR(255);
+ALTER TABLE aluno ADD COLUMN pai_id BIGINT;
+ALTER TABLE aluno ADD COLUMN mae_id BIGINT;
+ALTER TABLE aluno ADD CONSTRAINT fk_pai FOREIGN KEY (pai_id) REFERENCES pai(id);
+ALTER TABLE aluno ADD CONSTRAINT fk_mae FOREIGN KEY (mae_id) REFERENCES mae(id);

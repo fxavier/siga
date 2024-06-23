@@ -1,0 +1,10 @@
+-- ALTER TABLE IF EXISTS aluno alter column turma_id set data type integer;
+ALTER TABLE IF EXISTS avaliacao alter column nota set data type numeric(38,2);
+ALTER TABLE IF EXISTS avaliacao alter column classe_id set data type integer;
+ALTER TABLE IF EXISTS avaliacao alter column disciplina_id set data type integer;
+ALTER TABLE IF EXISTS avaliacao alter column turma_id set data type integer;
+ALTER TABLE IF EXISTS frequencia alter column nota set data type numeric(38,2);
+ALTER TABLE IF EXISTS frequencia alter column disciplina_id set data type integer;
+ALTER TABLE IF EXISTS frequencia alter column turma_id set data type integer;
+ALTER TABLE IF EXISTS inscricao alter column turma_id set data type integer;
+ALTER TABLE IF EXISTS matricula alter column classe_id set data type integer;

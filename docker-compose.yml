@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  postgresdb:
+    image: postgres:15-alpine
+    container_name: siga-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: siga
+      POSTGRES_PASSWORD: siga
+      POSTGRES_DB: sigadb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker-volumes/postgres:/var/lib/postgresql/data
