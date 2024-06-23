@@ -5,12 +5,16 @@ import java.util.Optional;
 
 import com.xavier.model.Mae;
 import com.xavier.dto.MaeDTO;
+import com.xavier.exception.ServiceException;
 import com.xavier.repository.MaeRepository;
 import com.xavier.service.exception.MaeException;   
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import lombok.NonNull;
+
 
 @ApplicationScoped
 public class MaeServiceImpl implements MaeService {
@@ -20,7 +24,7 @@ public class MaeServiceImpl implements MaeService {
 
     @Override
     @Transactional
-    public MaeDTO create(MaeDTO maeDTO) {
+    public MaeDTO create(@Valid MaeDTO maeDTO) {
         if(existsMae(maeDTO.getNome())) {
             throw new MaeException("Mae com esse nome ja existe");
         }
@@ -33,7 +37,7 @@ public class MaeServiceImpl implements MaeService {
 
     @Override
     @Transactional
-    public MaeDTO update(Long id, MaeDTO maeDTO) {
+    public MaeDTO update(@NonNull Long id, @Valid MaeDTO maeDTO) {
         Optional<Mae> maeOptional = maeRepository.findByIdOptional(id);
         if (!maeOptional.isPresent()) {
             throw new MaeException("Mae nao encontrado");
@@ -55,22 +59,16 @@ public class MaeServiceImpl implements MaeService {
     }
 
     @Override
-    public MaeDTO findById(Long id) {
-        Optional<Mae> maeOptional = maeRepository.findByIdOptional(id);
-        if (!maeOptional.isPresent()) {
-           throw new MaeException("Mae nao encontrada");
-        }
-        Mae mae = maeOptional.get();
+    public MaeDTO findById(@NonNull Long id) {
+        Mae mae = maeRepository.findByIdOptional(id)
+                .orElseThrow(() -> new ServiceException("Mae nao encontrado com id[%s]", id));
         return toDTO(mae);
     }
 
     @Override
-    public void delete(Long id) {
-        Optional<Mae> maeOptional = maeRepository.findByIdOptional(id);
-        if (!maeOptional.isPresent()) {
-           throw new MaeException("Mae nao encontrada");
-        }
-        Mae mae = maeOptional.get();
+    public void delete(@NonNull Long id) {
+        Mae mae = maeRepository.findByIdOptional(id)
+                .orElseThrow(() -> new ServiceException("Mae nao encontrado com id[%s]", id));
         maeRepository.delete(mae);
     }
 

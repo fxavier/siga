@@ -1,18 +1,30 @@
 package com.xavier.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class MaeDTO {
+
     private Long id;
+    @NotEmpty(message = "{Mae.nome.required}")
     private String nome;
+    @NotEmpty(message = "{Mae.telefone.required}")
     private String telefone;
+
+    @Email(message = "{Mae.email.invalid}")
     private String email;
     private String endereco;
 }
