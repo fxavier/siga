@@ -1,8 +1,6 @@
 package com.xavier.dto;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,12 +17,13 @@ import lombok.Setter;
 public class MaeDTO {
 
     private Long id;
-    @NotEmpty(message = "{Mae.nome.required}")
+    @NotEmpty(message = "{Object.required}")
     private String nome;
-    @NotEmpty(message = "{Mae.telefone.required}")
+    @NotEmpty(message = "{Object.required}")
     private String telefone;
 
-    @Email(message = "{Mae.email.invalid}")
+    @Email(message = "{Object.email.invalid}")
     private String email;
+    @NotEmpty(message = "{Object.required}")
     private String endereco;
 }

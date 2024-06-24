@@ -1,14 +1,18 @@
 package com.xavier.service;
 
 import com.xavier.dto.TipoDocumentoDTO;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 public interface TipoDocumentoService {
-    TipoDocumentoDTO create(TipoDocumentoDTO tipoDocumentoDTO);
-    TipoDocumentoDTO update(Long id, TipoDocumentoDTO tipoDocumentoDTO);
+    TipoDocumentoDTO create(@Valid TipoDocumentoDTO tipoDocumentoDTO);
+    TipoDocumentoDTO update(@NotNull Long id, @Valid TipoDocumentoDTO tipoDocumentoDTO);
     List<TipoDocumentoDTO> findAll();
-    TipoDocumentoDTO findById(Long id);
-    void delete(Long id);
+    TipoDocumentoDTO findById(@NotNull Long id);
+    void delete(@NotNull Long id);
 }
 
 

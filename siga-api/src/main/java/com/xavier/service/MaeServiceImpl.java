@@ -7,7 +7,7 @@ import com.xavier.model.Mae;
 import com.xavier.dto.MaeDTO;
 import com.xavier.exception.ServiceException;
 import com.xavier.repository.MaeRepository;
-import com.xavier.service.exception.MaeException;   
+
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -25,14 +25,9 @@ public class MaeServiceImpl implements MaeService {
     @Override
     @Transactional
     public MaeDTO create(@Valid MaeDTO maeDTO) {
-        if(existsMae(maeDTO.getNome())) {
-            throw new MaeException("Mae com esse nome ja existe");
-        }
-
         Mae mae = toEntity(maeDTO);
         maeRepository.persist(mae);
         return toDTO(mae);
-
     }
 
     @Override
@@ -40,9 +35,9 @@ public class MaeServiceImpl implements MaeService {
     public MaeDTO update(@NonNull Long id, @Valid MaeDTO maeDTO) {
         Optional<Mae> maeOptional = maeRepository.findByIdOptional(id);
         if (!maeOptional.isPresent()) {
-            throw new MaeException("Mae nao encontrado");
+            throw new ServiceException("Mae com id[%s] nao encontrado", id);
         }
-        Mae mae = maeOptional.get();
+        Mae mae = maeRepository.findByIdOptional(id).get();
         mae.setNome(maeDTO.getNome());
         mae.setEmail(maeDTO.getEmail());
         mae.setTelefone(maeDTO.getTelefone());
@@ -94,7 +89,4 @@ public class MaeServiceImpl implements MaeService {
                 .build();
     }
 
-    private boolean existsMae(String nome) {
-        return maeRepository.findByName(nome) != null;
-    }
 }

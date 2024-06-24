@@ -9,6 +9,8 @@ import com.xavier.repository.TipoDocumentoRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Optional;
 
@@ -21,7 +23,7 @@ public class TipoDocumentoServiceImpl implements TipoDocumentoService {
 
     @Override
     @Transactional
-    public TipoDocumentoDTO create(TipoDocumentoDTO tipoDocumentoDTO) {
+    public TipoDocumentoDTO create(@Valid TipoDocumentoDTO tipoDocumentoDTO) {
         if (existsTipoDocumento(tipoDocumentoDTO.getDescricao())) {
             throw new RuntimeException("Tipo de documento já existe");
             
@@ -34,7 +36,7 @@ public class TipoDocumentoServiceImpl implements TipoDocumentoService {
 
     @Override
     @Transactional
-    public TipoDocumentoDTO update(Long id, TipoDocumentoDTO tipoDocumentoDTO) {
+    public TipoDocumentoDTO update(@NotNull Long id, @Valid TipoDocumentoDTO tipoDocumentoDTO) {
         Optional<TipoDocumento> tipoDocumentoOptional = tipoDocumentoRepository.findByIdOptional(id);
         if (!tipoDocumentoOptional.isPresent()) {
             throw new RuntimeException("Tipo de documento não encontrado");
@@ -55,7 +57,7 @@ public class TipoDocumentoServiceImpl implements TipoDocumentoService {
     }
 
     @Override
-    public TipoDocumentoDTO findById(Long id) {
+    public TipoDocumentoDTO findById(@NotNull Long id) {
         Optional<TipoDocumento> tipoDocumentoOptional = tipoDocumentoRepository.findByIdOptional(id);
         if (!tipoDocumentoOptional.isPresent()) {
             throw new RuntimeException("Tipo de documento não encontrado");
@@ -65,7 +67,7 @@ public class TipoDocumentoServiceImpl implements TipoDocumentoService {
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void delete(@NotNull Long id) {
         Optional<TipoDocumento> tipoDocumentoOptional = tipoDocumentoRepository.findByIdOptional(id);
         if (!tipoDocumentoOptional.isPresent()) {
             throw new RuntimeException("Tipo de documento não encontrado");

@@ -26,9 +26,9 @@ public class MaeResource {
 
     @POST
     public Response create(MaeDTO maeDTO) {
-        maeService.create(maeDTO);
+       MaeDTO maeCriada = maeService.create(maeDTO);
         return Response.status(Response.Status.CREATED)
-                .entity(maeDTO)
+                .entity(maeCriada)
                 .build();
     }
 

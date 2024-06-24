@@ -1,0 +1,1 @@
+ALTER TABLE aluno ADD COLUMN numero VARCHAR(100);

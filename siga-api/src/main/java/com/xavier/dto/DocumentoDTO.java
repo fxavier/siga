@@ -1,18 +1,21 @@
 package com.xavier.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
 import com.xavier.model.Aluno;
 import com.xavier.model.TipoDocumento;
 
-@Data
-@Builder
-@NoArgsConstructor
+
+@Getter
+@Setter
 @AllArgsConstructor
+@Builder
 public class DocumentoDTO {
     private Long id;
     private Aluno aluno;

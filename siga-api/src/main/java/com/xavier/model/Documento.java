@@ -37,7 +37,7 @@ public class Documento {
 
     @ManyToOne
     @JoinColumn(name = "tipo_documento_id")
-    private TipoDocumento tipo;
+    private TipoDocumento tipoDocumento;
 
     @Column(name = "data_emissao")
     private LocalDate dataEmissao;
